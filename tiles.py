@@ -22,9 +22,18 @@ clock = pg.time.Clock()
 done = False
 
 # 타일 랜덤 작업
-tiles = []
+# tiles = []
+# for index in range(0, COLUMN_COUNT * ROW_COUNT):
+#     tiles.append(index)
+
+tiles =[x for x in range(COLUMN_COUNT * ROW_COUNT)] 
+tile_colors = {0:BLACK}
 for index in range(0, COLUMN_COUNT * ROW_COUNT):
-    tiles.append(index)
+    tile_colors[index]= WHITE
+
+
+
+
 print(tiles)
 shuffle(tiles)
 print(tiles)
@@ -40,7 +49,11 @@ class Tiles :
             pg.draw.rect(screen, BLACK,
                         (self.row_pos * CELL_SIZE, self.col_pos * CELL_SIZE,
                           CELL_SIZE,CELL_SIZE))
-                
+    def draw(self,color):
+        pg.draw.rect(screen, color , pg.Rect
+                     (self.row_pos * CELL_SIZE+1, self.col_pos * CELL_SIZE+1,
+                       CELL_SIZE-1, CELL_SIZE-1))
+            
     def move(self):
        
         print (self.tile_no, self.row_pos, self.col_pos)    
@@ -72,6 +85,15 @@ def runGame():
                 tile= Tiles(tile_no, row_pos, col_pos)
                 tile.draw_black()
                 tile.move()
+
+            for x in range(len(tiles)):
+              
+                tile_no= tiles[x]
+                color = tiles[tile_no]
+                row_pos = x *  CELL_SIZE % ROW_COUNT
+                col_pos = x * CELL_SIZE // COLUMN_COUNT
+                tile= Tiles(tile_no, row_pos, col_pos)
+                tile.draw(color) 
                 # print (row_pos, col_pos)
 
         draw_grid()
