@@ -1,5 +1,5 @@
 import pygame as pg # 1. 파이게임 불러오기
-from random import randint, shuffle
+from random import  shuffle
 
 pg.init()           # 2. 초기화
 
@@ -21,16 +21,29 @@ clock = pg.time.Clock()
 
 done = False
 
+# 타일 랜덤 작업
+tiles = []
+for index in range(0, COLUMN_COUNT * ROW_COUNT):
+    tiles.append(index)
+print(tiles)
+shuffle(tiles)
+print(tiles)
 
 class Tiles :
-    def __init__(self):
-        
-        pass
-    def draw(self):
-        pass
-    
-    def move(row_pos, col_pos, tile_no):
-        print (row_pos, col_pos, tile_no)    
+    def __init__(self,tile_no, row_pos, col_pos):
+        self.tile_no = tile_no
+        self.row_pos = row_pos
+        self.col_pos = col_pos
+       
+    def draw_black(self):
+        if self.tile_no ==0 :
+            pg.draw.rect(screen, BLACK,
+                        (self.row_pos * CELL_SIZE, self.col_pos * CELL_SIZE,
+                          CELL_SIZE,CELL_SIZE))
+                
+    def move(self):
+       
+        print (self.tile_no, self.row_pos, self.col_pos)    
         
         
 
@@ -55,12 +68,14 @@ def runGame():
             elif event.type == pg.MOUSEBUTTONDOWN:
                 row_pos = event.pos[0] // CELL_SIZE
                 col_pos = event.pos[1] // CELL_SIZE
-                tile_no = row_pos + col_pos * COLUMN_COUNT
-                Tiles.move(row_pos, col_pos, tile_no)
+                tile_no = tiles[row_pos + col_pos * COLUMN_COUNT]
+                tile= Tiles(tile_no, row_pos, col_pos)
+                tile.draw_black()
+                tile.move()
                 # print (row_pos, col_pos)
 
         draw_grid()
-        
+       
         pg.display.update()
             
 runGame()
