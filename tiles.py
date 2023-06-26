@@ -9,8 +9,8 @@ WHITE = (255, 255, 255)
 GRAY = (128,128,128)
 RED = (255,0,0)
 CELL_SIZE = 100
-BOARD_SIZE_X = 3
-BOARD_SIZE_Y = 3
+BOARD_SIZE_X = 4
+BOARD_SIZE_Y = 4
 
 SCREEN_WIDTH = CELL_SIZE * BOARD_SIZE_X
 SCREEN_HEIGHT = CELL_SIZE * BOARD_SIZE_Y
@@ -48,18 +48,24 @@ class Tiles :
         check = False
         poor = False
         check_data= 0
+        check_poor= 0
         for index in range(1,BOARD_SIZE_X * BOARD_SIZE_Y):
             if index == tiles[index-1]:
                 check_data += 1
-            print (index, tiles[index-1])
-        print (check_data, BOARD_SIZE_X * BOARD_SIZE_Y -1)
+            print (index, tiles[index-1])    
         if check_data == BOARD_SIZE_X * BOARD_SIZE_Y -1 :
             check = True  
-        elif check_data == BOARD_SIZE_X * BOARD_SIZE_Y -3 and \
-            tiles[BOARD_SIZE_X * BOARD_SIZE_Y-2]== BOARD_SIZE_X * BOARD_SIZE_Y-1 and\
-            tiles[BOARD_SIZE_X * BOARD_SIZE_Y-1]== BOARD_SIZE_X * BOARD_SIZE_Y-2 :
+        for index in range(1,BOARD_SIZE_X * BOARD_SIZE_Y-2):
+            if index == tiles[index-1]:
+                check_poor += 1
+        if check_poor == BOARD_SIZE_X * BOARD_SIZE_Y -3 and \
+            BOARD_SIZE_X * BOARD_SIZE_Y-2 == tiles[BOARD_SIZE_X * BOARD_SIZE_Y-2] and \
+            BOARD_SIZE_X * BOARD_SIZE_Y-1 == tiles[BOARD_SIZE_X * BOARD_SIZE_Y-3]:
             poor = True
-        
+            
+        print (check_data,check_poor, BOARD_SIZE_X * BOARD_SIZE_Y -2,tiles[BOARD_SIZE_X * BOARD_SIZE_Y-2] \
+                 ,BOARD_SIZE_X * BOARD_SIZE_Y -1,tiles[BOARD_SIZE_X * BOARD_SIZE_Y-3])
+
         return check, poor
 
     def draw(self):
