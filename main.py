@@ -16,11 +16,23 @@ class Game:
         grid =[[x + y *GAME_SIZE for x in range(1, GAME_SIZE + 1)] \
                for y in range(GAME_SIZE)]
         grid[-1][-1] = 0
-        print(grid)
-
-    def new(self):
-        self.create_game()
+        return grid  # self.grid = [[1,2,3],[4,5,6],[7,8,0]]
     
+    def draw_tiles(self):
+        self.tiles = []
+        for row, x in enumerate(self.tiles_grid):
+            self.tiles.append([])
+            for col, tile in enumerate(x):
+                if tile !=0:          # sprite (game, x , y , text)
+                    self.tiles[row].append(Tile(self, col, row, str(tile)))
+                else:
+                    self.tiles[row].append(Tile(self, col, row, "empty"))
+ 
+    def new(self):
+        self.all_sprites = pygame.sprite.Group()
+        self.tiles_grid = self.create_game()
+        self.tiles_grid_completed = self.create_game()
+
     def run(self):
         self.playing = True
         while self.playing:
@@ -30,7 +42,7 @@ class Game:
             self.draw()
            
     def update(self):
-        pass
+        self.all_sprites.update()
 
     def draw_grid(self):
         for row in range(-1, GAME_SIZE * TILESIZE, TILESIZE): # 세로 줄
@@ -40,7 +52,9 @@ class Game:
 
     def draw(self):
         self.screen.fill(BGCOLOR)
+        self.all_sprites.draw(self.screen)
         self.draw_grid()
+        self.draw_tiles()
         pygame.display.flip()
 
     def events(self):
