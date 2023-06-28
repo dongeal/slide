@@ -38,7 +38,9 @@ class Block(pygame.sprite.Sprite):
         # Update the position of this object by setting the values
         # of rect.x and rect.y
         self.rect = self.image.get_rect()
- 
+    
+    
+
     def reset_pos(self):
         """ Reset position to the top of the screen, at a random x location.
         Called by update() or the main program loop if there is a collision.
@@ -125,15 +127,14 @@ while not done:
  
     # See if the player block has collided with anything.
     blocks_hit_list = pygame.sprite.spritecollide(player, block_list, False)
- 
+   
     # Check the list of collisions.
     for block in blocks_hit_list:
         score += 1
         print(score)
- 
         # Reset block to the top of the screen to fall again.
         block.reset_pos()
- 
+
     # Draw all the spites
     all_sprites_list.draw(screen)
  
