@@ -59,13 +59,13 @@ class Game:
         if self.previous_choice == 'left':
             possible_moves.remove('right') if 'right' in possible_moves else possible_moves
 
-        if self.previous_choice == 'right':
+        elif self.previous_choice == 'right':
             possible_moves.remove('left') if 'left' in possible_moves else possible_moves
     
-        if self.previous_choice == 'up':
+        elif self.previous_choice == 'up':
             possible_moves.remove('down') if 'down' in possible_moves else possible_moves
         
-        if self.previous_choice == 'down':
+        elif self.previous_choice == 'down':
             possible_moves.remove('up') if 'up' in possible_moves else possible_moves
   
         choice = random.choice(possible_moves)
@@ -75,15 +75,15 @@ class Game:
             self.tiles_grid[row][col], self.tiles_grid[row][col + 1] = \
                                 self.tiles_grid[row][col + 1], self.tiles_grid[row][col]
 
-        if choice == 'left':
+        elif choice == 'left':
             self.tiles_grid[row][col], self.tiles_grid[row][col - 1] = \
                                 self.tiles_grid[row][col - 1], self.tiles_grid[row][col]
 
-        if choice == 'up':
+        elif choice == 'up':
             self.tiles_grid[row][col], self.tiles_grid[row - 1][col] = \
                                 self.tiles_grid[row - 1][col], self.tiles_grid[row][col]
 
-        if choice == 'down':                         
+        elif choice == 'down':                         
             self.tiles_grid[row][col], self.tiles_grid[row + 1][col] = \
                                 self.tiles_grid[row + 1][col], self.tiles_grid[row][col]
                             
@@ -176,10 +176,10 @@ class Game:
         if self.game_choice == 'EASY':
             UIElement(840,320, "Easy").draw(self.screen)
             UIElement(710, 380, "High Score - %.3f" % (self.high_score_easy if self.high_score_easy >0 else 0)).draw(self.screen)
-        if self.game_choice == 'MEDIUM':
+        elif self.game_choice == 'MEDIUM':
             UIElement(840,320, "Medium").draw(self.screen)
             UIElement(710, 380, "High Score - %.3f" % (self.high_score_medium if self.high_score_medium >0 else 0)).draw(self.screen)
-        if self.game_choice == 'HARD':
+        elif self.game_choice == 'HARD':
             UIElement(840,320, "Hard").draw(self.screen)
             UIElement(710, 380, "High Score - %.3f" % (self.high_score_hard if self.high_score_hard >0 else 0)).draw(self.screen)
 
@@ -206,15 +206,15 @@ class Game:
                                 self.tiles_grid[row][col], self.tiles_grid[row][col + 1] = \
                                 self.tiles_grid[row][col + 1], self.tiles_grid[row][col]
                             
-                            if tile.left() and self.tiles_grid[row][col - 1] == 0:
+                            elif tile.left() and self.tiles_grid[row][col - 1] == 0:
                                 self.tiles_grid[row][col], self.tiles_grid[row][col - 1] = \
                                 self.tiles_grid[row][col - 1], self.tiles_grid[row][col]
 
-                            if tile.up() and self.tiles_grid[row - 1][col] == 0:
+                            elif tile.up() and self.tiles_grid[row - 1][col] == 0:
                                 self.tiles_grid[row][col], self.tiles_grid[row - 1][col] = \
                                 self.tiles_grid[row - 1][col], self.tiles_grid[row][col]
                             
-                            if tile.down() and self.tiles_grid[row + 1][col] == 0:
+                            elif tile.down() and self.tiles_grid[row + 1][col] == 0:
                                 self.tiles_grid[row][col], self.tiles_grid[row + 1][col] = \
                                 self.tiles_grid[row + 1][col], self.tiles_grid[row][col]
                             
@@ -226,18 +226,18 @@ class Game:
                           self.game_choice = 'EASY'
                           self.game_size = 3
                           self.new()
-                      if button.text == "Medium":
+                      elif button.text == "Medium":
                           self.game_choice = 'MEDIUM'
                           self.game_size = 4
                           self.new()
-                      if button.text == "Hard":
+                      elif button.text == "Hard":
                           self.game_choice = 'HARD'
                           self.game_size = 5
                           self.new()
-                      if button.text == "Shuffle":
+                      elif button.text == "Shuffle":
                           self.shuffle_time = 0
                           self.start_shuffle = True
-                      if button.text == "Reset":
+                      elif button.text == "Reset":
                           self.new()
                           
     def show_start_screen(self):
