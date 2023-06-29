@@ -34,7 +34,7 @@ class Tile(pygame.sprite.Sprite):
                self.rect.top <= mouse_y <= self.rect.bottom
    
    def right(self):
-      return self.rect.x + TILESIZE < GAME_SIZE * TILESIZE
+      return self.rect.x + TILESIZE < self.game.game_size * TILESIZE
 
    def left(self):
       return self.rect.x - TILESIZE >= 0   
@@ -43,7 +43,7 @@ class Tile(pygame.sprite.Sprite):
       return self.rect.y - TILESIZE >= 0
 
    def down(self):
-      return self.rect.y + TILESIZE < GAME_SIZE * TILESIZE
+      return self.rect.y + TILESIZE < self.game.game_size * TILESIZE
    
 
 class UIElement:
@@ -66,7 +66,7 @@ class Button:
    
    def draw(self, screen):
       pygame.draw.rect(screen, self.colour, (self. x,self.y, self.width, self.height))
-      font = pygame.font.SysFont("Consolas", 30)
+      font = pygame.font.SysFont("Consolas",30)
       text = font.render(self.text, True, self.text_colour)
       self.font_size = font.size(self.text)
       draw_x = self.x + (self.width / 2) - self.font_size[0] / 2

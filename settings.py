@@ -8,7 +8,7 @@ BGCOLOR = DARKGREY
 # game settings
 WIDTH = 1100
 HEIGHT = 641
-FPS = 60
+FPS = 30
 title = 'Sliding Puzzle Game'
 TILESIZE = 128
 GAME_SIZE = 3
