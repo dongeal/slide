@@ -244,6 +244,7 @@ class Game:
         self.game_choice = 'EASY'
         self.game_size = 3
 
+   
 game = Game()
 while True:
     game.show_start_screen()
